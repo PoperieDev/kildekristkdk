@@ -1,15 +1,71 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const recoleta = localFont({
+  src: [
+    {
+      path: "/font/Recoleta-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "/font/Recoleta-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "/font/Recoleta-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "/font/Recoleta-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "/font/Recoleta-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "/font/Recoleta-Thin.ttf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "/font/RecoletaAlt-Regular.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "/font/RecoletaAlt-Bold.ttf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "/font/RecoletaAlt-SemiBold.ttf",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "/font/RecoletaAlt-Medium.ttf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "/font/RecoletaAlt-Light.ttf",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "/font/RecoletaAlt-Thin.ttf",
+      weight: "100",
+      style: "italic",
+    },
+  ],
 });
 
 export const metadata = {
@@ -20,11 +76,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${recoleta.className}`}>
         <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
