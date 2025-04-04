@@ -1,8 +1,4 @@
 import App from "@/components/App";
-import Plan from "@/components/Plan";
-import Step from "@/components/Step";
-import { Check, CheckCircle, CheckCircle2, Loader2, X } from "lucide-react";
-import Image from "next/image";
 
 const MOCK_STEPS = [
   {
@@ -33,7 +29,7 @@ const MOCK_STEPS = [
 export default function Home() {
   return (
     <main className="w-full min-h-screen my-48 flex justify-center">
-      <div className="gap-16 w-1/3 flex flex-col">
+      <div className="gap-16 w-fit flex flex-col">
         <div>
           <h1 className="text-6xl font-bold">Undersøg din kilde</h1>
         </div>

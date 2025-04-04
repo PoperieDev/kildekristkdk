@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Plan from "./Plan";
 import Step from "./Step";
 import { motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
+import { createOrGetPlan } from "./Actions";
 
 export default function App() {
   const [plan, setPlan] = useState(null);
@@ -12,11 +14,24 @@ export default function App() {
   const [steps, setSteps] = useState();
   const [url, setUrl] = useState("");
 
-  async function search() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Check for URL in search params when component mounts
+  useEffect(() => {
+    const urlParam = searchParams.get("url");
+    if (urlParam) {
+      setUrl(urlParam);
+      // Auto-search if URL is in params
+      searchWithUrl(urlParam);
+    }
+  }, [searchParams]);
+
+  async function searchWithUrl(urlToSearch) {
     setLoadingPlan(true);
     setPlan(null);
     setSteps(null);
-    const plan = await getPlan();
+    const plan = await createOrGetPlan(urlToSearch);
     // Add status: "pending" to each object in the plan array
     const planWithStatus = plan.map((item) => ({
       ...item,
@@ -26,18 +41,15 @@ export default function App() {
     setPlan(planWithStatus);
   }
 
-  async function getPlan() {
-    console.log(url);
-    const res = await fetch("/api/ai/generate-plan", {
-      method: "POST",
-      body: JSON.stringify({
-        url: url,
-      }),
-    });
+  async function search() {
+    // Update URL in search params
+    const params = new URLSearchParams(window.location.search);
+    params.set("url", url);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.pushState({}, "", newUrl);
 
-    const data = await res.json();
-
-    return data.plan;
+    // Perform search with current URL
+    searchWithUrl(url);
   }
 
   return (
@@ -66,8 +78,8 @@ export default function App() {
                 <div className="grid gap-4">
                   {steps
                     ? steps.map((step, index) => (
-                        <Step key={index} stepData={step} />
-                      ))
+                      <Step key={index} stepData={step} />
+                    ))
                     : null}
                 </div>
               </motion.div>

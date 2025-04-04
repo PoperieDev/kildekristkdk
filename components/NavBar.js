@@ -1,4 +1,14 @@
-export default function NavBar() {
+"use server";
+
+import { createClient } from "@/utils/supabase/server";
+import LogInButton from "./LogInButton";
+import LogOutButton from "./LogOutButton";
+
+export default async function NavBar() {
+
+  const supabase = await createClient()
+  const { data: { user: user } } = await supabase.auth.getUser()
+
   return (
     <div className="navbar grid place-items-center bg-base-100/50 backdrop-blur-xl z-50 shadow-sm fixed top-0 left-0">
       <div className="container navbar">
@@ -13,7 +23,7 @@ export default function NavBar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Log ind</a>
+          {!user ? <LogInButton /> : <LogOutButton />}
         </div>
       </div>
     </div>
