@@ -1,9 +1,16 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 export async function createOrGetPlan(url) {
   const supabase = await createClient();
+
+  const { data: { user: user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/signin")
+  }
 
   const { data, error } = await supabase
     .from("searches")
