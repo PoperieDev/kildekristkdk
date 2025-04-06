@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
+import NavBar from "@/components/navigation/NavBar";
+import Footer from "@/components/layout/Footer";
 import { Toaster } from "react-hot-toast";
 
 const recoleta = localFont({

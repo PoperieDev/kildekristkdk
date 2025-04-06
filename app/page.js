@@ -1,4 +1,4 @@
-import App from "@/components/App";
+import SearchContainer from "@/components/search/SearchContainer";
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
         <div>
           <h1 className="text-6xl font-bold">Undersøg din kilde</h1>
         </div>
-        <App />
+        <SearchContainer />
       </div>
     </main>
   );

@@ -12,6 +12,8 @@
     "@google/generative-ai": "^0.24.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
+    "axios": "^1.8.4",
+    "jsdom": "^26.0.0",
     "lucide-react": "^0.486.0",
     "motion": "^12.6.3",
     "next": "15.2.4",

@@ -1,4 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kildekritik Web Application
+
+A Next.js application for evaluating the credibility of web content sources.
+
+## Application Structure
+
+### Components
+
+- **SearchContainer.js**: Main client component that manages search state and coordinates search functionality
+- **SearchForm.js**: Form component for entering and submitting URLs
+- **ResultsDisplay.js**: Container for showing search results
+- **Plan.js**: Visual timeline of the source evaluation plan
+- **Steps.js**: Container for displaying individual evaluation steps
+- **Step.js**: Component for displaying a single evaluation step with substeps
+
+### Server Components & Actions
+
+- **Actions.js**: Server actions for interacting with Supabase and AI services
+- **app/page.js**: Main page server component
+
+## State Management
+
+The application uses React's built-in state management via useState and useEffect hooks. The main search state is managed in the SearchContainer component, which handles:
+
+1. URL input state
+2. Search parameters from the URL
+3. Plan data from server actions
+4. Loading states
+
+## Data Flow
+
+1. User enters a URL in SearchForm
+2. SearchContainer updates URL parameters and calls server action
+3. Server action checks database or generates new evaluation plan with AI
+4. Results are displayed through the Plan and Steps components
+
+## Technologies
+
+- Next.js App Router
+- Supabase for backend
+- Framer Motion for animations
+- DaisyUI for UI components
+- React Hooks for state management
 
 ## Getting Started
 
