@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const recoleta = localFont({
   src: [
@@ -78,6 +79,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${recoleta.className}`}>
         <NavBar />
+        <Toaster position="bottom-center" reverseOrder={false} />
         {children}
         <Footer />
       </body>

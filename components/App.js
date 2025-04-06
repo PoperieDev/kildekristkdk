@@ -6,6 +6,8 @@ import Step from "./Step";
 import { motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createOrGetPlan } from "./Actions";
+import toast from "react-hot-toast";
+import Steps from "./Steps";
 
 export default function App() {
   const [plan, setPlan] = useState(null);
@@ -32,6 +34,12 @@ export default function App() {
     setPlan(null);
     setSteps(null);
     const plan = await createOrGetPlan(urlToSearch);
+    if (plan.error) {
+      console.log(plan.error);
+      toast.error(plan.error);
+      setLoadingPlan(false);
+      return;
+    }
     // Add status: "pending" to each object in the plan array
     const planWithStatus = plan.map((item) => ({
       ...item,
@@ -55,7 +63,7 @@ export default function App() {
   return (
     <div className="w-full grid">
       <p className="mb-2">Indtast kilde</p>
-      <label className="input w-full pr-0 z-10 shadow-xl">
+      <form action={search} className="input w-full pr-0 z-10 shadow-xl">
         <span className="label">URL</span>
         <input
           onSubmit={(e) => search()}
@@ -67,21 +75,15 @@ export default function App() {
         <a onClick={() => search()} className="btn btn-neutral">
           Undersøg
         </a>
-      </label>
-      {loadingPlan || plan !== null ? (
+      </form>
+      {plan !== null ? (
         <div className="w-full z-0">
           <div className="mx-auto pt-8 shadow-sm gap-4 border-t-none min-h-96 rounded-t-none card bg-base-100 w-[calc(100%-4rem)] card-border p-4">
             <div className="flex w-full flex-col gap-4">
               <Plan plan={plan} loadingPlan={loadingPlan} />
               <motion.div layout>
                 <div className="divider">PROCESS</div>
-                <div className="grid gap-4">
-                  {steps
-                    ? steps.map((step, index) => (
-                      <Step key={index} stepData={step} />
-                    ))
-                    : null}
-                </div>
+                <Steps initialSteps={steps} />
               </motion.div>
             </div>
           </div>

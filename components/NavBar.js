@@ -5,9 +5,10 @@ import LogInButton from "./LogInButton";
 import LogOutButton from "./LogOutButton";
 
 export default async function NavBar() {
-
-  const supabase = await createClient()
-  const { data: { user: user } } = await supabase.auth.getUser()
+  const supabase = await createClient();
+  const {
+    data: { user: user },
+  } = await supabase.auth.getUser();
 
   return (
     <div className="navbar grid place-items-center bg-base-100/50 backdrop-blur-xl z-50 shadow-sm fixed top-0 left-0">
