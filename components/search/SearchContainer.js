@@ -6,6 +6,7 @@ import SearchForm from "./SearchForm";
 import ResultsDisplay from "../results/ResultsDisplay";
 import { createOrGetPlan } from "../actions/PlanActions";
 import toast from "react-hot-toast";
+import { getSteps } from "../actions/Steps";
 
 export default function SearchContainer() {
   const [plan, setPlan] = useState(null);
@@ -31,6 +32,7 @@ export default function SearchContainer() {
     setPlan(null);
     setSteps(null);
 
+    // Get plan
     try {
       const plan = await createOrGetPlan(urlToSearch);
       if (plan.error) {
@@ -40,29 +42,32 @@ export default function SearchContainer() {
         return;
       }
 
-      // Add status: "pending" to each object in the plan array
-      const planWithStatus = plan.map((item) => ({
-        ...item,
-        status: "pending",
-      }));
-
-      setPlan(planWithStatus);
+      setPlan(plan);
     } catch (error) {
       console.error("Search error:", error);
       toast.error("An error occurred during search");
     } finally {
       setLoadingPlan(false);
     }
+
+    // Get steps
+    try {
+      const steps = await getSteps(urlToSearch);
+      if (steps.error) {
+        console.log(steps.error);
+        toast.error(steps.error);
+        setLoadingPlan(false);
+        return;
+      }
+
+      setSteps(steps);
+    } catch (error) {
+      console.error("Steps error:", error);
+      toast.error("An error occurred during steps");
+    }
   }
 
   async function handleSearch() {
-    // Update URL in search params
-    const params = new URLSearchParams(window.location.search);
-    params.set("url", url);
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.pushState({}, "", newUrl);
-
-    // Perform search with current URL
     searchWithUrl(url);
   }
 
@@ -70,8 +75,15 @@ export default function SearchContainer() {
     <div className="w-full grid">
       <SearchForm url={url} setUrl={setUrl} onSearch={handleSearch} />
 
-      {plan && (
-        <ResultsDisplay plan={plan} loadingPlan={loadingPlan} steps={steps} />
+      {plan && steps ? (
+        <ResultsDisplay
+          initialPlan={plan}
+          loadingPlan={loadingPlan}
+          initialSteps={steps}
+          url={url}
+        />
+      ) : (
+        <></>
       )}
     </div>
   );

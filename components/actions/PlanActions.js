@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { generatePlan } from "./AiService";
+import { generateFirstStep, generatePlan } from "./AiService";
 import { isUrlValid } from "./ValidationUtils";
 import { requireAuth } from "./AuthActions";
 
@@ -28,13 +28,19 @@ export async function createOrGetPlan(url) {
   }
 
   const plan = await generatePlan(url);
+  //const firstStep = await generateFirstStep(plan);
+
+  const planWithStatus = plan.map((item) => ({
+    ...item,
+    status: "pending",
+  }));
 
   const { response, addError } = await supabase
     .from("searches")
     .insert([
       {
         url: url,
-        plan: plan,
+        plan: planWithStatus,
         user_id: user.id,
       },
     ])
@@ -45,5 +51,5 @@ export async function createOrGetPlan(url) {
     return { error: "Database fejl" };
   }
 
-  return plan;
+  return planWithStatus;
 }

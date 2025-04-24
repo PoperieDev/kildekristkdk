@@ -1,7 +1,9 @@
 "use client";
 
+import { createClient } from "@/utils/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Clipboard, Loader2, CheckCircle2 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,8 +36,38 @@ const itemVariants = {
   }),
 };
 
-export default function Plan({ plan, loadingPlan }) {
-  if (!plan) return null;
+export default function Plan({ initialPlan, loadingPlan, url }) {
+  const [plan, setPlan] = useState(initialPlan);
+
+  useEffect(() => {
+    if (!initialPlan || !initialPlan.length) return;
+
+    const supabase = createClient();
+    if (!supabase) {
+      console.error("Supabase client not available");
+      return;
+    }
+
+    const subscription = supabase
+      .channel(`plan-updates`)
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "searches",
+          filter: `url=eq.${url}`,
+        },
+        (payload) => {
+          setPlan(payload.new.plan);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [initialPlan]);
 
   return (
     <motion.div
@@ -92,9 +124,15 @@ function PlanStep({ step, index, isLast, previousStepPending }) {
       variants={itemVariants}
       layout
     >
-      {index !== 0 && <hr className="bg-base" />}
+      {index !== 0 && <hr className={isPending ? "bg-base" : "bg-primary"} />}
 
-      <div className="timeline-end shadow-sm timeline-box">{step.title}</div>
+      <div
+        className={`${
+          isPending ? "" : "bg-primary/20"
+        } timeline-end shadow-sm timeline-box`}
+      >
+        {step.title}
+      </div>
 
       <div className="timeline-middle">
         {isPending && previousStepPending ? (

@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Step({ stepData }) {
   const { title, status, description, steps = [], finish_text } = stepData;
-  const isDone = status === "done";
+  const isDone = status === "finished";
 
   return (
     <div className="grid gap-2">
@@ -24,7 +24,7 @@ export default function Step({ stepData }) {
         {steps.map((step, index) => (
           <React.Fragment key={index}>
             <div className="flex gap-2 items-center">
-              {step.status === "done" ? (
+              {step.status === "finished" ? (
                 <>
                   <CheckCircle2 className="size-4" />
                   <p>{step.title}</p>

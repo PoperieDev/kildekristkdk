@@ -80,7 +80,9 @@ export default function RootLayout({ children }) {
       <body className={`${recoleta.className}`}>
         <NavBar />
         <Toaster position="bottom-center" reverseOrder={false} />
-        {children}
+        <main className="min-h-screen container mx-auto flex items-center justify-center">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

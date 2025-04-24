@@ -1,13 +1,14 @@
-import SearchContainer from "@/components/search/SearchContainer";
+import SearchForm from "@/components/v2/SearchForm";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main className="w-full min-h-screen my-48 flex justify-center">
+    <main className="">
       <div className="gap-16 w-fit flex flex-col">
         <div>
           <h1 className="text-6xl font-bold">Undersøg din kilde</h1>
         </div>
-        <SearchContainer />
+        <SearchForm />
       </div>
     </main>
   );

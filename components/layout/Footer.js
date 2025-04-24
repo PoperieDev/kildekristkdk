@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="footer grid place-items-center sm:footer-horizontal bg-neutral text-neutral-content relative">
-      <div className="w-full h-full absolute bg-neutral blur-3xl -z-10"></div>
+      <div className="w-full h-full absolute bg-neutral blur-xl -z-10"></div>
       <div className="container footer sm:footer-horizontal p-10">
         <nav>
           <h6 className="footer-title">Services</h6>
