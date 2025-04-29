@@ -3,6 +3,7 @@
 import { createClient } from "@/utils/supabase/server";
 import LogInButton from "./LogInButton";
 import LogOutButton from "./LogOutButton";
+import Link from "next/link";
 
 export default async function NavBar() {
     const supabase = await createClient();
@@ -15,9 +16,9 @@ export default async function NavBar() {
             <div className="navbar grid place-items-center bg-base-100/50 backdrop-blur-xl z-50 shadow-sm fixed top-0 left-0">
                 <div className="container navbar">
                     <div className="navbar-start">
-                        <a href="/" className="btn btn-ghost text-xl">
+                        <Link href="/" className="btn btn-ghost text-xl">
                             Kildekritisk.dk
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="navbar-end">
