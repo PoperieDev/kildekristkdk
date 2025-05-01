@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function SignInPage() {
     useEffect(() => {
         createClient().auth.signInWithOAuth(
-            { provider: 'google', options: { redirectTo: `http://localhost:3000/auth/callback`, } }
+            { provider: 'google', options: { redirectTo: `https://www.kildekritisk.dk/auth/callback`, } }
         );
     }, []);
 }
