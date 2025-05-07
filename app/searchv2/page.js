@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "motion/react";
 import PlanV3 from "@/components/v3/Plan";
 import Research from "@/components/v3/Research";
 import Results from "@/components/v3/Results";
+import Link from "next/link";
 
 export default function SearchPage({ searchParams }) {
   const { url } = React.use(searchParams);
@@ -279,9 +280,9 @@ export default function SearchPage({ searchParams }) {
           >
             <div className="flex gap-2 mb-4">
               <ArrowLeft className="w-4 opacity-75" />
-              <a href="/" className="hover:underline">
+              <Link href="/" className="hover:underline">
                 Tilbage til hjem
-              </a>
+              </Link>
             </div>
             <h1 className="text-4xl font-bold mb-8">
               Undersøgelse af kilden:{" "}
