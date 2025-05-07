@@ -1,7 +1,7 @@
 "use client";
 
 import { createSearchv2 } from "@/components/v3/actions/actions";
-import { Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import React, { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import PlanV3 from "@/components/v3/Plan";
@@ -277,6 +277,12 @@ export default function SearchPage({ searchParams }) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
+            <div className="flex gap-2 mb-4">
+              <ArrowLeft className="w-4 opacity-75" />
+              <a href="/" className="hover:underline">
+                Tilbage til hjem
+              </a>
+            </div>
             <h1 className="text-4xl font-bold mb-8">
               Undersøgelse af kilden:{" "}
               {url && url.length > 30 ? url.substring(0, 30) + "..." : url}
