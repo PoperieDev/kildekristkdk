@@ -7,7 +7,7 @@ export default function SignInPage() {
   useEffect(() => {
     createClient().auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${process.env.URL}/auth/callback` },
+      options: { redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback` },
     });
   }, []);
 }
