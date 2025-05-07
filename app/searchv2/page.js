@@ -8,7 +8,7 @@ import PlanV3 from "@/components/v3/Plan";
 import Research from "@/components/v3/Research";
 import Results from "@/components/v3/Results";
 
-export default function searchPage({ searchParams }) {
+export default function SearchPage({ searchParams }) {
   const { url } = React.use(searchParams);
 
   const [loadingSearch, setLoadingSearch] = useState(true);
