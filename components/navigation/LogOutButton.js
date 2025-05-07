@@ -12,7 +12,7 @@ export default function LogOutButton() {
         onClick={() => {
           signOut();
         }}
-        className="btn"
+        className="btn "
       >
         Log ud
       </button>
