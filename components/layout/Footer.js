@@ -4,25 +4,13 @@ export default function Footer() {
       <div className="w-full h-full absolute bg-neutral blur-xl -z-10"></div>
       <div className="container footer sm:footer-horizontal p-10">
         <nav>
-          <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
+          <h6 className="footer-title">Info</h6>
+          <a className="">Udviklet på HTX</a>
+          <a className="">SO-Opgave projekt</a>
+          <a className="">07/05/2025</a>
         </nav>
-        <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Legal</h6>
-          <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
-        </nav>
+        <nav></nav>
+        <nav></nav>
       </div>
     </footer>
   );
