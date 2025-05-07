@@ -13,7 +13,7 @@ export default function LogInButton() {
           createClient().auth.signInWithOAuth({
             provider: "google",
             options: {
-              redirectTo: `${process.env.URL}/auth/callback`,
+              redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
             },
           });
         }}
