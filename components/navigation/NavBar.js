@@ -19,11 +19,11 @@ export default async function NavBar() {
                         <Link href="/" className="btn btn-ghost text-xl">
                             Kildekritisk.dk
                         </Link>
-                        <Link href="/omos" className="btn btn-ghost">
+                        <Link href="/omos" className="btn hover:border hover:border-black/50 font-normal opacity-75">
                             Hvem er vi?
                         </Link>
                     </div>
-                    <p className="opacity-50 text-nowrap">DETTE ER ET SKOLEPROJEKT</p>
+                    <p className="opacity-50 text-nowrap">DENNE WEBSIDE ER ET SKOLEPROJEKT</p>
 
                     <div className="navbar-end">
                         {!user ? <LogInButton /> : <LogOutButton />}
