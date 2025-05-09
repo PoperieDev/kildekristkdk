@@ -13,7 +13,6 @@ export default async function Home() {
         .from("datav2")
         .select("*")
         .order("created_at", { ascending: false })
-        .limit(5)
         .eq("user_id", user?.id);
 
     return (
